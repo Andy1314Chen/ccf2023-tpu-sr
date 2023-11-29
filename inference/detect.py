@@ -9,7 +9,7 @@ from fix import *
 from npuengine import EngineOV
 from PIL import Image
 import cv2
-from metrics.niqe import calculate_niqe
+# from metrics.niqe import calculate_niqe
 import copy
 import multiprocessing
 from tqdm import tqdm
@@ -19,6 +19,7 @@ import numpy as np
 import sys
 sys.path.append(".")
 sys.path.append("..")
+from metrics.niqe import calculate_niqe
 
 
 global tile_runtime, tile_extension_dict
