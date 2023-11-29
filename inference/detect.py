@@ -1,3 +1,10 @@
+import copy
+import multiprocessing
+from tqdm import tqdm
+from torch.utils.data import Dataset, DataLoader
+import gc
+import numpy as np
+from metrics.niqe import calculate_niqe
 import cv2
 from PIL import Image
 from npuengine import EngineOV
@@ -9,13 +16,9 @@ import math
 import json
 import time
 import warnings
-from metrics.niqe import calculate_niqe
-import numpy as np
-import gc
-from torch.utils.data import Dataset, DataLoader
-from tqdm import tqdm
-import multiprocessing
-import copy
+import sys
+sys.path.append(".")
+sys.path.append("..")
 
 global tile_runtime, tile_extension_dict
 
@@ -372,8 +375,8 @@ def postproprecess(image):
     # clip output_tile
     if args.tile_pad != 0:
         image = image[:,
-                  args.tile_pad * args.upscale_ratio: -args.tile_pad * args.upscale_ratio,
-                  args.tile_pad * args.upscale_ratio: -args.tile_pad * args.upscale_ratio]
+                      args.tile_pad * args.upscale_ratio: -args.tile_pad * args.upscale_ratio,
+                      args.tile_pad * args.upscale_ratio: -args.tile_pad * args.upscale_ratio]
 
     image = image * 255
     image[image > 255] = 255
@@ -586,6 +589,9 @@ def main():
     start_all = time.time()
     result, runtime, niqe = [], [], []
     tile_runtime = []
+
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
 
     paths = paths[:20]
     if args.predict_method == "dataset":
