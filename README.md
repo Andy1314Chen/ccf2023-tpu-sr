@@ -14,6 +14,21 @@
 
 #### 二、运行步骤
 
+###### 0. 准备数据
+
+将提供的原始数据文件放在 dataset 文件夹下，文件结构如下：
+
+```shell
+|-- dataset
+    |-- test
+        |-- 0001.png
+        |-- ...
+    |-- val
+        |-- 0001.png
+        |-- ...
+```
+
+
 ###### 1. 模型转换为 bmodel
 
 在 `FT_SUBMIT/models` 目录下，运行以下命令。该步骤执行成功后，可以在该目录下找到 `out.bmodel` 文件。
@@ -36,7 +51,7 @@ python3 inference/detect.py
 
 ###### 3. 结果校验
 
-在 `FT_SUBMIT` 目录下，运行以下命令，主要检验以下 3 个条件，执行成功后提示 `Congratulations, the result is legal !!`。
+在 `FT_SUBMIT` 目录下，运行以下命令，主要检验以下 3 个条件，执行成功后提示 `Congratulations, the result is valid !!`。
 
 ```shell
 python3 inference/check.py
