@@ -1,24 +1,25 @@
+import warnings
+import time
+import json
+import math
+import argparse
+import glob
+import os
+from fix import *
+from npuengine import EngineOV
+from PIL import Image
+import cv2
+from metrics.niqe import calculate_niqe
 import copy
 import multiprocessing
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 import gc
 import numpy as np
-from metrics.niqe import calculate_niqe
-import cv2
-from PIL import Image
-from npuengine import EngineOV
-from fix import *
-import os
-import glob
-import argparse
-import math
-import json
-import time
-import warnings
 import sys
 sys.path.append(".")
 sys.path.append("..")
+
 
 global tile_runtime, tile_extension_dict
 
@@ -593,7 +594,7 @@ def main():
     if not os.path.exists(args.output):
         os.makedirs(args.output)
 
-    paths = paths[:20]
+    # paths = paths[:20]
     if args.predict_method == "dataset":
 
         input_paths = []
